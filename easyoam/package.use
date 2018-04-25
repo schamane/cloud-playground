@@ -1,18 +1,1 @@
-dev-vcs/git		blksha1 curl -gpg iconv nls -pcre -perl -python threads webdav -cgi -cvs -doc -emacs -gnome-keyring -gtk highlight -subversion -tk -xinetd -pcre-jit
-media-gfx/blender	-game-engine cycles ffmpeg tiff
-dev-cpp/glog		gflags
-media-video/ffmpeg	mp3 theora x264
-dev-libs/libxml2	python
-x11-libs/cairo		-X
-dev-lang/mono		minimal
-#dev-libs/openssl	bindist
-dev-libs/libgpg-error	threads
-dev-libs/libgcrypt	threads
-net-misc/curl		-http2
-net-libs/nodejs		icu
-app-emulation/open-vm-tools	-modules
-sys-libs/gdbm		berkdb
-#dev-libs/nettle		-gmp
-app-eselect/eselect-php	fpm
-dev-lang/php		fpm hash curl
-app-emulation/containerd	-btrfs
+dev-vcs/git		blksha1 -curl -gpg iconv nls -pcre -perl -python threads -webdav -cgi -cvs -doc -emacs -gnome-keyring -gtk highlight -subversion -tk -xinetd -pcre-jit
