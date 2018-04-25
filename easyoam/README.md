@@ -19,6 +19,7 @@ cfdisk /dev/sda
 create file systems
 
 ```
+mkdosfs -F 32 -n efi-boot /dev/sda1
 mkfs.ext2 -T small /dev/sda2
 mkswap /dev/sda3
 mkfs.ext4 /dev/sda4
@@ -123,4 +124,77 @@ cd linux
 wget https://github.com/schamane/cloud-playground/raw/master/easyoam/.config
 make oldconfig
 make -j3
+make modules_install
+cp System.map /boot/System-4.16.4
+cp arch/x86_64/boot/bzImage /boot/kernel-4.16.4
+```
+
+configure system
+
+```
+wget https://github.com/schamane/cloud-playground/raw/master/easyoam/fstab -O /etc/fstab
+nano -w /etc/conf.d/hostname
+# change host name to easyoam
+
+emerge --ask --noreplace net-misc/netifrc
+
+nano -w /etc/conf.d/net
+# config_enp0s3="dhcp"
+# dns_domain_lo="easyoam.de"
+
+cd /etc/init.d
+ln -s net.lo net.enp0s3
+rc-update add net.enp0s3 default
+
+nano -w /etc/hosts
+# 127.0.0.1       easyoam.local localhost
+# ::1             easyoam.local localhost
+
+passwd
+# change root password
+
+useradd -m -G users,wheel -s /bin/bash <username>
+```
+
+install tools
+
+```
+emerge -1q metalog
+rc-update add metalog default
+emerge -1q cronie
+rc-update add cronie default
+crontab /etc/crontab
+rc-update add sshd default
+emerge --ask net-misc/dhcpcd
+rc-update add dhcpcd default
+```
+
+install bootloader
+
+```
+emerge --ask --verbose sys-boot/grub:2
+grub-install /dev/sda
+nano -w /etc/default/grub
+cd /boot
+ln -s System-4.16.4 System
+ln -s kernel-4.16.4 kernel
+cd
+grub-mkconfig -o /boot/grub/grub.cfg
+nano -w /boot/grub/grub.cfg
+# remove kernel version
+```
+
+reboot systems
+```
+exit
+cd
+umount -l /mnt/gentoo/dev{/shm,/pts,}
+umount -R /mnt/gentoo
+reboot
+```
+
+## Software
+```
+emerge -1q htop
+emerge -1q app-misc/screen app-misc/mc
 ```
