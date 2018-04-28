@@ -33,8 +33,8 @@ get *stage3* and extract to rootfs
 mkdir -p /mnt/gentoo
 mount /dev/sda4 /mnt/gentoo
 cd /mnt/gentoo/
-wget http://distfiles.gentoo.org/experimental/amd64/musl/stage3-amd64-musl-vanilla-20180404.tar.bz2
-tar xpf stage3-amd64-musl-vanilla-20180404.tar.bz2 --xattrs-include='*.*' --numeric-owner
+wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20180426T214504Z.tar.xz
+tar xpf stage3-amd64-20180426T214504Z.tar.xz --xattrs-include='*.*' --numeric-owner
 wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.xz
 tar xf portage-latest.tar.xz -C /mnt/gentoo/usr
 ```
