@@ -1,6 +1,6 @@
 # Host bootstrap
 
-## Gentoo installation - MUSL
+## Gentoo installation
 
 get host in to resque mode
 
@@ -107,6 +107,7 @@ emerge -1q sys-libs/timezone-data
 emerge --config sys-libs/timezone-data
 wget https://github.com/schamane/cloud-playground/raw/master/easyoam/locale.gen - O /etc/locale.gen
 wget https://github.com/schamane/cloud-playground/raw/master/easyoam/02locale - O /etc/env.d/02locale
+locale-gen
 env-update && source /etc/profile && export PS1="(chroot) $PS1"
 ```
 
