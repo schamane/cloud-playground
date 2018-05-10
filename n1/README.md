@@ -84,8 +84,10 @@ configure timezone and locale
 echo "Europe/Brussels" > /etc/timezone
 emerge -1q sys-libs/timezone-data
 emerge --config sys-libs/timezone-data
-wget https://github.com/schamane/cloud-playground/raw/master/n1/locale.gen - O /etc/locale.gen
-wget https://github.com/schamane/cloud-playground/raw/master/n1/02locale - O /etc/env.d/02locale
+rm /etc/locale.gen
+rm /etc/conf.d/02locale
+wget https://github.com/schamane/cloud-playground/raw/master/n1/locale.gen -P /etc/
+wget https://github.com/schamane/cloud-playground/raw/master/n1/02locale -P /etc/env.d/
 env-update && source /etc/profile && export PS1="(chroot) $PS1"
 ```
 
@@ -94,74 +96,56 @@ create kernel
 ```
 emerge -1q sys-devel/bc
 cd /usr/src
-wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.16.5.tar.xz
-tar xf linux-4.16.5.tar.xz
+wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.16.8.tar.xz
+tar xf linux-4.16.8.tar.xz
 nano -w /etc/portage/package.mask
 # add >=sys-kernel/linux-headers-4.17
-ln -s linux-4.16.5 linux
+ln -s linux-4.16.8 linux
 cd linux
 wget https://github.com/schamane/cloud-playground/raw/master/easyoam/.config
 make oldconfig
 make -j3
 make modules_install
-cp System.map /boot/System-4.16.5
-cp arch/x86_64/boot/bzImage /boot/kernel-4.16.5
+cp System.map /boot/System-4.16.8
+cp arch/x86_64/boot/bzImage /boot/kernel-4.16.8
 ```
 
-configure system
+configure system for boot with systemd
 
 ```
 wget https://github.com/schamane/cloud-playground/raw/master/easyoam/fstab -O /etc/fstab
 nano -w /etc/conf.d/hostname
-# change host name to easyoam
+# change host name to n1
 
-emerge --ask --noreplace net-misc/netifrc
-
-nano -w /etc/conf.d/net
-# config_enp0s3="dhcp"
-# dns_domain_lo="easyoam.de"
-
-cd /etc/init.d
-ln -s net.lo net.enp0s3
-rc-update add net.enp0s3 default
-
-nano -w /etc/hosts
-# 127.0.0.1       easyoam.local localhost
-# ::1             easyoam.local localhost
-
-passwd
-# change root password
-
-useradd -m -G users,wheel -s /bin/bash <username>
-passwd <username>
+nano -e /etc/hosts
+# add n1 befor localhost
 ```
 
-install tools
-
-```
-emerge -1q metalog
-rc-update add metalog default
-emerge -1q cronie
-rc-update add cronie default
-crontab /etc/crontab
-rc-update add sshd default
-emerge --ask net-misc/dhcpcd
-rc-update add dhcpcd default
-```
-
-install bootloader
+## install bootloader
 
 ```
 emerge --ask --verbose sys-boot/grub:2
 grub-install /dev/sda
 nano -w /etc/default/grub
-cd /boot
-ln -s System-4.16.4 System
-ln -s kernel-4.16.4 kernel
+# Change timeout to 1
+# Enable line for systemd init
 cd
 grub-mkconfig -o /boot/grub/grub.cfg
 nano -w /boot/grub/grub.cfg
 # remove kernel version
+```
+
+## configure systemd
+
+See README.md from systemd folder
+
+```
+nano -w /etc/hosts
+# 127.0.0.1       n1.easyoam n1 localhost
+# ::1             n1.easyoam n1 localhost
+
+passwd
+# change root password
 ```
 
 reboot systems
