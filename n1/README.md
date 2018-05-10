@@ -30,12 +30,14 @@ setup portage system
 ```
 wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.xz
 tar xf portage-latest.tar.xz -C /mnt/gentoo/usr
-wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/make.conf -O etc/portage/make.conf
+wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/make.conf -P etc/portage/
+wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/package.use -P etc/portage/
+wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/package.mask -P etc/portage/
+wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/package.accept_keywords -P etc/portage/
 mkdir /mnt/gentoo/etc/portage/repos.conf
-wget https://github.com/schamane/cloud-playground/raw/n1/easyoam/portage/repos.conf/gentoo.conf -O /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
-wget https://github.com/schamane/cloud-playground/raw/n1/easyoam/portage/package.use -O /mnt/gentoo/etc/portage/package.use
+wget https://github.com/schamane/cloud-playground/raw/n1/easyoam/portage/repos.conf/gentoo.conf -P /mnt/gentoo/etc/portage/repos.conf/
 mkdir /mnt/gentoo/etc/portage/sets
-wget https://github.com/schamane/cloud-playground/raw/n1/easyoam/portage/sets/cloud -O /mnt/gentoo/etc/portage/sets/cloud
+wget https://github.com/schamane/cloud-playground/raw/n1/easyoam/portage/sets/cloud -P /mnt/gentoo/etc/portage/sets/
 ```
 
 copy dns info
