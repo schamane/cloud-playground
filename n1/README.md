@@ -35,9 +35,9 @@ wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/package.
 wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/package.mask -P etc/portage/
 wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/package.accept_keywords -P etc/portage/
 mkdir /mnt/gentoo/etc/portage/repos.conf
-wget https://github.com/schamane/cloud-playground/raw/n1/easyoam/portage/repos.conf/gentoo.conf -P /mnt/gentoo/etc/portage/repos.conf/
+wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/repos.conf/gentoo.conf -P /mnt/gentoo/etc/portage/repos.conf/
 mkdir /mnt/gentoo/etc/portage/sets
-wget https://github.com/schamane/cloud-playground/raw/n1/easyoam/portage/sets/cloud -P /mnt/gentoo/etc/portage/sets/
+wget https://github.com/schamane/cloud-playground/raw/master/n1/portage/sets/cloud -P /mnt/gentoo/etc/portage/sets/
 ```
 
 copy dns info
@@ -68,20 +68,11 @@ mount /boot
 
 `mount /dev/sda2 /boot`
 
-switch to libress
-
-```
-emerge -f libressl
-emerge -C openssl
-emerge -1q libressl
-emerge -1q openssh wget python:2.7 python:3.5 iputils
-emerge -q @preserved-rebuild
-```
-
 emerge git and sync portage to latest
 
 ```
 emerge -1q dev-vcs/git
+rm -rf /usr/portage/
 emerge --sync
 emerge -1q portage
 eselect news read
@@ -93,8 +84,8 @@ configure timezone and locale
 echo "Europe/Brussels" > /etc/timezone
 emerge -1q sys-libs/timezone-data
 emerge --config sys-libs/timezone-data
-wget https://github.com/schamane/cloud-playground/raw/master/easyoam/locale.gen - O /etc/locale.gen
-wget https://github.com/schamane/cloud-playground/raw/master/easyoam/02locale - O /etc/env.d/02locale
+wget https://github.com/schamane/cloud-playground/raw/master/n1/locale.gen - O /etc/locale.gen
+wget https://github.com/schamane/cloud-playground/raw/master/n1/02locale - O /etc/env.d/02locale
 env-update && source /etc/profile && export PS1="(chroot) $PS1"
 ```
 
