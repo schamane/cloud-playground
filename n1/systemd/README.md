@@ -26,7 +26,7 @@ systemctl enable systemd-resolved.service
 ## add user to get access to journal
 
 ```
-useradd -m -G users,wheel,systemd-journal -s /bin/bash <user>
+useradd -m -G users,wheel,docker,systemd-journal -s /bin/bash <user>
 #or gpasswd --add <user> systemd-journal
 ```
 

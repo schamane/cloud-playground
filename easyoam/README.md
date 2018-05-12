@@ -6,15 +6,13 @@ get host in to resque mode
 
 create disk partitions
 
-``
-cfdisk /dev/sda
-``
+`cfdisk /dev/sda`
 
-| part | path  | size  |
-| ---- | ----- | ----- |
-| sda1 | bootloader | 2M  |
-| sda2 | /boot     | 128M     |
-| sda  | / | - |
+| part | path       | size |
+| ---- | ---------- | ---- |
+| sda1 | bootloader | 2M   |
+| sda2 | /boot      | 128M |
+| sda  | /          | -    |
 
 create file systems
 
@@ -27,7 +25,7 @@ mkfs.ext4 /dev/sda4
 
 mount rootfs
 
-get *stage3* and extract to rootfs
+get _stage3_ and extract to rootfs
 
 ```
 mkdir -p /mnt/gentoo
@@ -50,9 +48,7 @@ wget https://github.com/schamane/cloud-playground/raw/master/easyoam/package.use
 
 copy dns info
 
-``
-cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
-``
+`cp --dereference /etc/resolv.conf /mnt/gentoo/etc/`
 
 mounting the necessary filesystems
 
@@ -76,9 +72,7 @@ export PS1="(chroot) ${PS1}"
 
 mount /boot
 
-``
-mount /dev/sda2 /boot
-``
+`mount /dev/sda2 /boot`
 
 switch to libress
 
@@ -153,7 +147,7 @@ nano -w /etc/hosts
 passwd
 # change root password
 
-useradd -m -G users,wheel -s /bin/bash <username>
+useradd -m -G users,wheel,docker,systemd-journal -s /bin/bash <username>
 passwd <username>
 ```
 
@@ -186,6 +180,7 @@ nano -w /boot/grub/grub.cfg
 ```
 
 reboot systems
+
 ```
 exit
 cd
@@ -195,6 +190,7 @@ reboot
 ```
 
 ## Software
+
 ```
 emerge -1q htop
 emerge -1q app-misc/screen app-misc/mc
