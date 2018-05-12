@@ -20,9 +20,9 @@
 # Each frontend can specify its own entrypoints.
 #
 # Optional
-# Default: ["http"]
+# Default: ["https"]
 #
-# defaultEntryPoints = ["http", "https"]
+defaultEntryPoints = ["http", "https"]
 
 ################################################################
 # Entrypoints configuration
@@ -35,6 +35,9 @@
 [entryPoints]
     [entryPoints.http]
     address = ":80"
+
+    [entryPoints.https]
+    address = ":443"
 
 ################################################################
 # Traefik logs configuration
@@ -144,7 +147,7 @@
 # Optional
 # Default: ""
 #
-# domain = "docker.localhost"
+domain = "easyoam.de"
 
 # Expose containers by default in traefik
 #
