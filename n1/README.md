@@ -87,7 +87,8 @@ emerge --config sys-libs/timezone-data
 rm /etc/locale.gen
 rm /etc/conf.d/02locale
 wget https://github.com/schamane/cloud-playground/raw/master/n1/locale.gen -P /etc/
-wget https://github.com/schamane/cloud-playground/raw/master/n1/02locale -P /etc/env.d/
+#wget https://github.com/schamane/cloud-playground/raw/master/n1/02locale -P /etc/env.d/
+ln -s -n -f ../locale.conf /etc/env.d/02locale
 env-update && source /etc/profile && export PS1="(chroot) $PS1"
 ```
 
