@@ -14,7 +14,7 @@ start Portainer
 docker run -d --restart always -p 9000:9000 \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v portainer_data:/data --name portainer \
-  -l "traefik.frontend.rule=Host:portainer.easyoam.de" \
+  -l "traefik.frontend.rule=Host:portainer.n1.easyoam.de" \
   portainer/portainer
 ```
 
