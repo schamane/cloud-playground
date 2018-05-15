@@ -23,6 +23,7 @@
 # Default: ["https"]
 #
 defaultEntryPoints = ["http", "https"]
+insecureSkipVerify = true
 
 ################################################################
 # Entrypoints configuration
@@ -38,6 +39,7 @@ defaultEntryPoints = ["http", "https"]
 
     [entryPoints.https]
     address = ":443"
+	[entryPoints.https.tls]
 
 ################################################################
 # Traefik logs configuration
@@ -155,3 +157,11 @@ domain = "easyoam.de"
 # Default: true
 #
 # exposedByDefault = true
+[acme]
+email = "spam@myeburg.net"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+
+[acme.httpChallenge]
+entryPoint = "http"
