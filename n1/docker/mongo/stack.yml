@@ -1,0 +1,35 @@
+version: "3.6"
+
+services:
+
+    mongo:
+	image: mongo
+	restart: always
+	volumes: mongo_data:/data/db
+	networks:
+	    - local-bridge
+	environment:
+	    MONGO_INITDB_ROOT_USERNAME: root
+	    MONGO_INITDB_ROOT_PASSWORD: Ra45_3334_DE
+	    
+    mongo-express:
+	image: mongo-express
+	restart: allways
+	environment:
+	    ME_CONFIG_MONGODB_ADMINUSERNAME: root
+	    ME_CONFIG_MONGODB_ADMINPASSWORD: Ra45_3334_DE
+	networks:
+	    - local-bridge
+	deploy:
+	    labels:
+		traefik.backend: "mongo"
+		traefik.protocol: "http"
+		traefik.frontend.entryPoints: "https"
+		traefik.frontend.passTLSCert: "true"
+		traefik.port: "8081"
+
+volumes:
+    mongo_data:
+
+networks:
+    local-bridge:
