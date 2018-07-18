@@ -65,13 +65,13 @@ export PS1="(chroot) ${PS1}"
 
 mount /boot
 
-`mount /dev/sda2 /boot`
+`mount /dev/sda1 /boot`
 
 emerge git and sync portage to latest
 
 ```
 emerge -1q dev-vcs/git
-rm -rf /usr/portage/
+# rm -rf /usr/portage/
 emerge --sync
 emerge -1q portage
 eselect news read
@@ -85,8 +85,8 @@ emerge -1q sys-libs/timezone-data
 emerge --config sys-libs/timezone-data
 rm /etc/locale.gen
 rm /etc/conf.d/02locale
-wget https://github.com/schamane/cloud-playground/raw/master/n1/locale.gen -P /etc/
-#wget https://github.com/schamane/cloud-playground/raw/master/n1/02locale -P /etc/env.d/
+wget https://github.com/schamane/cloud-playground/raw/master/compulypse/locale.gen -P /etc/
+#wget https://github.com/schamane/cloud-playground/raw/master/compulypse/02locale -P /etc/env.d/
 ln -s -n -f ../locale.conf /etc/env.d/02locale
 env-update && source /etc/profile && export PS1="(chroot) $PS1"
 ```
