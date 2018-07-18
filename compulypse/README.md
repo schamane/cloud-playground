@@ -96,24 +96,24 @@ create kernel
 ```
 emerge -1q sys-devel/bc
 cd /usr/src
-wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.16.8.tar.xz
-tar xf linux-4.16.8.tar.xz
+wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.17.8.tar.xz
+tar xf linux-4.17.8.tar.xz
 nano -w /etc/portage/package.mask
-# add >=sys-kernel/linux-headers-4.17
-ln -s linux-4.16.8 linux
+# add >=sys-kernel/linux-headers-4.18
+ln -s linux-4.17.8 linux
 cd linux
-wget https://github.com/schamane/cloud-playground/raw/master/easyoam/.config
+wget https://github.com/schamane/cloud-playground/raw/master/compulypse/.config
 make oldconfig
 make -j3
 make modules_install
-cp System.map /boot/System-4.16.8
-cp arch/x86_64/boot/bzImage /boot/kernel-4.16.8
+cp System.map /boot/System-4.17.8
+cp arch/x86_64/boot/bzImage /boot/kernel-4.17.8
 ```
 
 configure system for boot with systemd
 
 ```
-wget https://github.com/schamane/cloud-playground/raw/master/easyoam/fstab -O /etc/fstab
+wget https://github.com/schamane/cloud-playground/raw/master/compulypse/fstab -O /etc/fstab
 nano -w /etc/conf.d/hostname
 # change host name to n1
 
