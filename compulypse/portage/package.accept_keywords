@@ -1,0 +1,13 @@
+app-admin/metalog ~amd64
+=sys-devel/gcc-8.1* **
+sys-process/htop ~amd64
+app-misc/screen ~amd64
+=sys-devel/binutils-2.30-r2 ~amd64
+=sys-libs/glibc-2.27* **
+=net-libs/libnsl-1.2* ~amd64
+=sys-kernel/linux-headers-4.16* ~amd64
+=net-misc/openssh-7.7* ~amd64
+#=app-emulation/docker-18.04.0 ~amd64
+#=app-emulation/docker-proxy-0.8.0_p20180314 ~amd64
+#=app-emulation/containerd-1.0.3 ~amd64
+#=app-emulation/runc-1.0.0_rc5-r1 ~amd64
