@@ -2,7 +2,7 @@
 
 ```
 mkdir -p /mnt/gentoo
-mount /dev/sda3 /mnt/gentoo
+mount /dev/sda4 /mnt/gentoo
 cd /mnt/gentoo/
 
 mount --types proc /proc /mnt/gentoo/proc
