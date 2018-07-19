@@ -1,15 +1,15 @@
 # Host bootstrap
 
-## Gentoo installation - MUSL
+## Gentoo installation
 
 get host in to resque mode
 
 create disk partitions as in PARTED.md
 
 ```
-mkfs.ext2 -T small /dev/sda1
-mkswap /dev/sda2
-mkfs.ext4 /dev/sda3
+mkfs.ext2 -T small /dev/sda2
+mkswap /dev/sda3
+mkfs.ext4 /dev/sda4
 ```
 
 mount rootfs
@@ -18,7 +18,7 @@ get _stage3_ and extract to rootfs
 
 ```
 mkdir -p /mnt/gentoo
-mount /dev/sda3 /mnt/gentoo
+mount /dev/sda4 /mnt/gentoo
 cd /mnt/gentoo/
 wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-systemd/stage3-amd64-systemd-20180713.tar.bz2
 tar xpf stage3-amd64-systemd-20180713.tar.bz2 --xattrs-include='*.*' --numeric-owner
@@ -65,7 +65,7 @@ export PS1="(chroot) ${PS1}"
 
 mount /boot
 
-`mount /dev/sda1 /boot`
+`mount /dev/sda2 /boot`
 
 emerge git and sync portage to latest
 
@@ -124,7 +124,7 @@ nano -e /etc/hosts
 ## install bootloader
 
 ```
-emerge --ask --verbose sys-boot/grub:2
+emerge --ask --verbose -q sys-boot/grub:2
 grub-install /dev/sda
 nano -w /etc/default/grub
 # Change timeout to 1
@@ -151,6 +151,9 @@ passwd
 reboot systems
 
 ```
+useradd -m -G users,wheel -s /bin/bash <username>
+passwd <username>
+
 exit
 cd
 umount -l /mnt/gentoo/dev{/shm,/pts,}

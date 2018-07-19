@@ -14,14 +14,16 @@ mklabel gpt
 ### create partitions
 
 ```
-mkpart primary 1 131
-name 2 boot
+mkpart primary 1 3
+name 1 grub
 set 1 bios_grub on
-set 1 boot on
+mkpart primary 3 131
+name 2 boot
+set 2 boot on
 mkpart primary 131 643
-name 2 swap
+name 3 swap
 mkpart primary 643 -1
-name 3 rootfs
+name 4 rootfs
 ```
 
 ### print configured partitions
