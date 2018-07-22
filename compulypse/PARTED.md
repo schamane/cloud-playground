@@ -33,3 +33,13 @@ name 4 rootfs
 ### quit parted
 
 `q`
+
+## GPT disk 2
+
+`parted -a optimal /dev/sdb`
+
+```
+rm1
+mkpart primary 1 -1
+name 1 storagefs
+```

@@ -16,6 +16,7 @@
 # NOTE: If your BOOT partition is ReiserFS, add the notail option to opts.
 /dev/sda2		/boot		ext2		defaults,noatime,noauto	0 2
 /dev/sda4		/		ext4		noatime		0 1
+/dev/sdb1               /storage        ext4            noatime         0 1
 #/dev/sda2		none		swap		sw		0 0
 #/dev/cdrom		/mnt/cdrom	auto		noauto,ro	0 0
 #/dev/fd0		/mnt/floppy	auto		noauto		0 0
