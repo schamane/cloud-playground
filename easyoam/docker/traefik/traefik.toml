@@ -159,7 +159,7 @@ domain = "easyoam.de"
 # exposedByDefault = true
 [acme]
 email = "spam@myeburg.net"
-storage = "acme.json"
+storage = "/etc/traefik/acme/acme.json"
 entryPoint = "https"
 onHostRule = true
 
